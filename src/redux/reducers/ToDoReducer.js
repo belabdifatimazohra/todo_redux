@@ -19,7 +19,8 @@ const TodoReducer = (state = initialState, action) =>{
             // Filter the list # to the one deleted and return it as the new state of the todo list
             newState = state.todos.filter((todo) => todo.id !== action.payload.id);
             return {todos: newState};
-       
+        case "COMPLETE":
+            return  { todos: [...state.todos] };
         default:
             return state;
     }

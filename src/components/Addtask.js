@@ -11,12 +11,11 @@ function Addtask() {
   const handleChange = (e) => {
     e.preventDefault();
     setInput(e.target.value);
-    console.log(input);
   };
 
 
   return (
-    <form >
+    <div>
       <input
         placeholder="Add a todo"
         onChange={handleChange}
@@ -30,7 +29,7 @@ function Addtask() {
       }}>
         Add todo
       </button>
-    </form>
+    </div>
   );
 }
 
