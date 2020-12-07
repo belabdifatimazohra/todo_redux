@@ -24,7 +24,7 @@ h1 {
   color: #fff;
   font-size: 30px;
 }
-
+/* Completed Task */
 .complete {
   text-decoration: line-through;
   opacity: 0.4;
@@ -139,6 +139,8 @@ h1 {
   color: #fff;
 }
 
-.checkBox {
-  width: 20px;
+.check {
+  height: 17px;
+  width: 17px;
+  cursor: pointer;
 }

@@ -13,7 +13,7 @@ const TodoReducer = (state = initialState, action) =>{
             newState = [...state.todos];
             // Find the index of the item to edit
             const index = newState.findIndex((elem) => elem.id === action.payload.id);
-            newState[index] = action.payload;
+            newState[index].task = action.payload.newTask;
             return{todos: newState}
         case "DELETE":
             // Filter the list # to the one deleted and return it as the new state of the todo list

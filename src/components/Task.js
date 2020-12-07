@@ -1,39 +1,60 @@
 import React from "react";
+import { useState } from "react";
 import { RiCloseCircleLine } from "react-icons/ri";
 import { TiEdit } from "react-icons/ti";
-// Import function actions
-import { complete } from "../redux/actions/ToDoActions";
+import { complete, editList, deletList } from "../redux/actions/ToDoActions"; // Import function actions
 import { useDispatch } from "react-redux";
+
 function Task({ task }) {
-  // dispatch info state
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); // dispatch info state
+  const [showEdit, setShowEdit] = useState(false); // show Edit form
+  const [input, setInput] = useState(""); // Input for the new input
+  const handleChange = (e) => {
+    setInput(e.target.value);
+  };
+
   return (
     <div
-      className={task.check ? "todo-row complete" : "todo-row"}
+      className={task.check ? "todo-row complete" : "todo-row"} // If checked task add class complete
       key={task.id}
     >
-      <div style={task.check ? { textDecoration: "line-through" } : {}}>
-        {task.task}
-      </div>
+      <div>{task.task}</div>
       <div className="icons">
-        <RiCloseCircleLine className="delete-icon" />
+        <RiCloseCircleLine
+          className="delete-icon"
+          onClick={(e) => {
+            dispatch(deletList(task));
+          }}
+        />
         <input
           type="checkbox"
-          checked={task.check}
-                  onChange={e => e.checked =  !task.check }
+          className="check"
           onClick={(e) => {
             task.check = !task.check;
             dispatch(complete());
           }}
         />
-
-        <TiEdit
-          className="edit-icon"
-          //    onClick={(e) => {
-          //       e.preventDefault();
-          //       dispatch(editList({ id: uuidv4(), task: input, check: false })}}
-        />
+        <TiEdit className="edit-icon" onClick={(e) => setShowEdit(!showEdit)} />
       </div>
+      {showEdit && (
+        <div>
+          <input
+            placeholder="Update your task"
+            value={input}
+            onChange={handleChange}
+            className="todo-input edit"
+          />
+          <button
+            className="todo-button edit"
+            onClick={(e) => {
+              dispatch(editList({ id: task.id, newTask: input }));
+              setShowEdit(!showEdit);
+            }}
+          >
+            Update
+          </button>
+        </div>
+      )}
     </div>
   );
 }
