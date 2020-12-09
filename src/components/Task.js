@@ -39,7 +39,7 @@ function Task({ task }) {
       {showEdit && (
         <div>
           <input
-            placeholder="Update your task"
+            placeholder={task.task}
             value={input}
             onChange={handleChange}
             className="todo-input edit"

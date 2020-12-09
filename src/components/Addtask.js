@@ -16,10 +16,12 @@ function Addtask() {
   return (
     <div>
       <input
-        placeholder="Add a todo"
+        placeholder="Add todo"
         onChange={handleChange}
         name="text"
         className="todo-input"
+        value={input}
+        
       />
 
       <button
@@ -27,6 +29,8 @@ function Addtask() {
         onClick={(e) => {
           e.preventDefault();
           dispatch(addTodo({ id: uuidv4(), task: input, check: false }));
+          setInput("");
+          
         }}
       >
         Add todo
